@@ -1,0 +1,145 @@
+---SELECT---
+
+SELECT * 
+FROM 
+    albums
+
+---ORDER BY---
+
+SELECT * 
+FROM 
+    albums 
+ORDER BY  
+    AlbumId DESC
+
+---WHERE---
+
+SELECT * 
+FROM 
+    albums 
+WHERE 
+    ArtistId = 84
+
+---LIMIT---
+
+SELECT * 
+FROM 
+    tracks
+LIMIT 
+    5 OFFSET 15
+
+---IN---
+
+SELECT * 
+FROM 
+    tracks 
+WHERE 
+    AlbumId IN (4,10)
+
+---IS NULL---
+
+SELECT * 
+FROM 
+    tracks 
+WHERE 
+    Composer IS NULL
+
+---INNER JOIN---
+
+SELECT * 
+FROM 
+    tracks 
+INNER JOIN 
+    albums ON albums.albumid = tracks.albumid
+
+---LEFT JOIN---
+
+SELECT * 
+FROM 
+    artists 
+LEFT JOIN albums ON
+    albums.ArtistId = artists.ArtistId
+
+---GROUP BY---
+
+SELECT 
+    albumid,
+    COUNT(trackid)
+FROM
+    tracks
+GROUP BY
+    albumid
+
+---INSERT---
+
+INSERT INTO artists (name)
+VALUES("Bud Powell")
+
+SELECT
+    ArtistId,
+    Name
+From 
+    Artists
+ORDER BY 
+    ArtistId DESC
+LIMIT 1
+
+---UPDATE---
+
+SELECT 
+    employeeid,
+    firstname,
+    lastname,
+    title,
+    email
+From
+    employees
+    
+Update employees
+Set lastname = "Smith"
+Where employeeid = 3
+
+---DELETE---
+
+CREATE TABLE artists_backup(
+   artistid INTEGER PRIMARY KEY AUTOINCREMENT,
+   name NVARCHAR
+);
+
+INSERT INTO artists_backup 
+SELECT artistid,name
+FROM artists;
+
+SELECT
+    artistid,
+    name
+From 
+    artists_backup;
+    
+DELETE FROM artists_backup
+WHERE artistid = 1;
+
+---REPLACE---
+
+CREATE TABLE IF NOT EXISTS positions(
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  min_salary NUMERIC       
+)
+
+INSERT INTO positions (title, min_salary)
+VALUES ('DBA', 120000),
+        ('Developer', 10000),
+        ('Architect', 150000);
+        
+SELECT * 
+FROM 
+positions;
+*CREATE UNIQUE INDEX idx_positions_title
+ON positions (title);*/
+
+REPLACE INTO positions (title, min_salary)
+VALUES('Full Stack Developer', 140000)
+
+REPLACE INTO positions (title, min_salary)
+VALUES('DBA', 170000)
